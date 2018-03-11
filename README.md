@@ -1,6 +1,8 @@
-# MyEtherWallet V4+ (ALPHA - VISIT [V3](https://github.com/kvhnuke/etherwallet) for the current site)<br/>Just looking to download? Grab our [latest release](https://github.com/MyEtherWallet/MyEtherWallet/releases)
+# MyEtherWallet Bitcoin Origin Fork
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/MyEtherWallet/MyEtherWallet.svg)](https://greenkeeper.io/)
+## Branching Strategy
+
+Please follow Gitflow (https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow). All features to be created off integration. Release branches will be created for release candidates, and master will represent live.
 
 ## Running the App
 
@@ -121,13 +123,3 @@ npm run test:int
 ├── static - Files that don't get compiled, just moved to build
 └── webpack_config - Webpack configuration
 ```
-
-### More information is available on the [Wiki Pages](https://github.com/MyEtherWallet/MyEtherWallet/wiki)
-
-## Thanks & Support
-
-<a href="https://browserstack.com/">
-<img src="https://i.imgur.com/Rib9y9E.png" align="left" />
-</a>
-
-Cross browser testing and debugging provided by the very lovely team at BrowserStack.
