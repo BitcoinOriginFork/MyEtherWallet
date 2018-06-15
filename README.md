@@ -1,5 +1,12 @@
 # MyEtherWallet Bitcoin Origin Fork
 
+Sidebar dark grey - #2f3034
+Background - #383b40
+Top and footer - #505664
+Header lower border - #ff7e60
+Primary - #ffa648
+component background - #596271
+
 ## Branching Strategy
 
 Please follow Gitflow (https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow). All features to be created off integration. Release branches will be created for release candidates, and master will represent live.

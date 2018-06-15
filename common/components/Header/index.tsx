@@ -5,11 +5,9 @@ import {
   TRemoveCustomNode,
   TAddCustomNetwork
 } from 'actions/config';
-import logo from 'assets/images/logo-myetherwallet.svg';
 import { Dropdown, ColorDropdown } from 'components/ui';
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
-import { Link } from 'react-router-dom';
 import { TSetGasPriceField } from 'actions/transaction';
 import {
   ANNOUNCEMENT_MESSAGE,
@@ -112,15 +110,6 @@ export default class Header extends PureComponent<Props, State> {
 
         <section className="Header-branding">
           <section className="Header-branding-inner container">
-            <Link to="/" className="Header-branding-title" aria-label="Go to homepage">
-              <img
-                className="Header-branding-title-logo"
-                src={logo}
-                height="64px"
-                width="245px"
-                alt="MyEtherWallet"
-              />
-            </Link>
             <div className="Header-branding-right">
               <span className="Header-branding-right-version hidden-xs">
                 <Version />
@@ -176,8 +165,6 @@ export default class Header extends PureComponent<Props, State> {
             </div>
           </section>
         </section>
-
-        <Navigation color={selectedNetwork && selectedNetwork.color} />
 
         {isAddingCustomNode && (
           <CustomNodeModal

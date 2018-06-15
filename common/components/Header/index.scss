@@ -80,7 +80,7 @@ $small-size: 900px;
   &-branding {
     color: white;
     padding: 0;
-    @include bg-gradient;
+    background-color: #505664;
 
     @include small-query {
       text-align: center;

@@ -27,15 +27,15 @@ class NavigationLink extends React.PureComponent<Props, {}> {
     }
 
     const linkClasses = classnames({
-      'NavigationLink-link': true,
-      'is-disabled': !link.to,
-      'is-active': isActive
+      'list-group-item': true,
+      active: isActive
     });
     const linkLabel = `nav item: ${translateRaw(link.name)}`;
 
     const linkEl =
       link.external || !link.to ? (
         <a
+          id={link.name}
           className={linkClasses}
           href={link.to}
           aria-label={linkLabel}
@@ -45,16 +45,12 @@ class NavigationLink extends React.PureComponent<Props, {}> {
           {translate(link.name)}
         </a>
       ) : (
-        <Link className={linkClasses} to={(link as any).to} aria-label={linkLabel}>
+        <Link id={link.name} className={linkClasses} to={(link as any).to} aria-label={linkLabel}>
           {translate(link.name)}
         </Link>
       );
 
-    return (
-      <li id={link.name} className="NavigationLink">
-        {linkEl}
-      </li>
-    );
+    return linkEl;
   }
 }
 

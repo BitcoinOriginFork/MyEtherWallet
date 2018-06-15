@@ -13,10 +13,11 @@ import {
   TAddCustomNetwork
 } from 'actions/config';
 import { TSetGasPriceField, setGasPriceField as dSetGasPriceField } from 'actions/transaction';
-import { AlphaAgreement, Footer, Header } from 'components';
+import { Footer, Header, Sidebar } from 'components';
 import { AppState } from 'reducers';
 import Notifications from './Notifications';
 import OfflineTab from './OfflineTab';
+import './index.scss';
 
 interface ReduxProps {
   languageSelection: AppState['config']['languageSelection'];
@@ -83,16 +84,18 @@ class TabSection extends Component<Props, {}> {
     };
 
     return (
-      <div className="page-layout">
-        <main>
-          <Header {...headerProps} />
-          <div className="Tab container">
-            {isUnavailableOffline && isOffline ? <OfflineTab /> : children}
-          </div>
-          <Footer latestBlock={latestBlock} />
-        </main>
-        <Notifications />
-        <AlphaAgreement />
+      <div className="wrapper">
+        <Sidebar />
+        <div className="page-layout">
+          <main>
+            <Header {...headerProps} />
+            <div className="Tab container">
+              {isUnavailableOffline && isOffline ? <OfflineTab /> : children}
+            </div>
+            <Footer latestBlock={latestBlock} />
+          </main>
+          <Notifications />
+        </div>
       </div>
     );
   }

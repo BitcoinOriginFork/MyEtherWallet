@@ -10,6 +10,10 @@
 @import "./variables/forms";
 @import "./variables/zindex";
 
+// Origin Styling
+$body-bg: #383b40;
+$text-color: white;
+
 // Misc.
 $border-radius-small: 0px;
 $border-radius-base: 0px;
@@ -306,3 +310,30 @@ $page-header-border-color: $gray-lighter;
 $dl-horizontal-offset: $component-offset-horizontal;
 $dl-horizontal-breakpoint: $grid-float-breakpoint;
 $hr-border: $gray-lighter;
+
+// List Group
+$list-group-bg:                 #2f3034;
+$list-group-border:             #2f3034;
+$list-group-border-radius:      $border-radius-base;
+
+//** Background color of single list items on hover
+$list-group-hover-bg:           #505664;
+//** Text color of active list items
+$list-group-active-color:       white;
+//** Background color of active list items
+$list-group-active-bg:          #505664;
+//** Border color of active list elements
+$list-group-active-border:      $list-group-active-bg;
+//** Text color for content within active list items
+$list-group-active-text-color:  lighten($list-group-active-bg, 40%);
+
+//** Text color of disabled list items
+$list-group-disabled-color:      $gray-light;
+//** Background color of disabled list items
+$list-group-disabled-bg:         $gray-lighter;
+//** Text color for content within disabled list items
+$list-group-disabled-text-color: $list-group-disabled-color;
+
+$list-group-link-color:         #505664;
+$list-group-link-hover-color:   lighten($list-group-active-bg, 40%);
+$list-group-link-heading-color: #505664;
