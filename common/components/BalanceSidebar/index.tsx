@@ -1,11 +1,9 @@
 import React from 'react';
 import AccountInfo from './AccountInfo';
-import Promos from './Promos';
 import TokenBalances from './TokenBalances';
 import { AppState } from 'reducers';
 import { getWalletInst } from 'selectors/wallet';
 import { connect } from 'react-redux';
-import EquivalentValues from './EquivalentValues';
 
 interface Block {
   name: string;
@@ -31,17 +29,8 @@ export class BalanceSidebar extends React.Component<StateProps> {
         content: <AccountInfo wallet={wallet} />
       },
       {
-        name: 'Promos',
-        isFullWidth: true,
-        content: <Promos />
-      },
-      {
         name: 'Token Balances',
         content: <TokenBalances />
-      },
-      {
-        name: 'Equivalent Values',
-        content: <EquivalentValues />
       }
     ];
 

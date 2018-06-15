@@ -3,7 +3,7 @@ import { getValues } from '../utils/helpers';
 export const languages = require('./languages.json');
 
 // Displays in the header
-export const VERSION = '4.0.0 (Alpha 0.1.0)';
+export const VERSION = '0.0.1 (Alpha 0.0.1)';
 export const N_FACTOR = 1024;
 
 // Displays at the top of the site, make message empty string to remove.
