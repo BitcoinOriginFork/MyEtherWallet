@@ -13,6 +13,13 @@
 // Origin Styling
 $body-bg: #383b40;
 $text-color: white;
+$content-color: #505664;
+
+$brand-primary:         #ffa648 !default;
+$brand-success:         #5cb85c !default;
+$brand-info:            #5bc0de !default;
+$brand-warning:         #f0ad4e !default;
+$brand-danger:          #d9534f !default;
 
 // Misc.
 $border-radius-small: 0px;
@@ -317,11 +324,11 @@ $list-group-border:             #2f3034;
 $list-group-border-radius:      $border-radius-base;
 
 //** Background color of single list items on hover
-$list-group-hover-bg:           #505664;
+$list-group-hover-bg:           $content-color;
 //** Text color of active list items
 $list-group-active-color:       white;
 //** Background color of active list items
-$list-group-active-bg:          #505664;
+$list-group-active-bg:          $content-color;
 //** Border color of active list elements
 $list-group-active-border:      $list-group-active-bg;
 //** Text color for content within active list items
@@ -334,6 +341,6 @@ $list-group-disabled-bg:         $gray-lighter;
 //** Text color for content within disabled list items
 $list-group-disabled-text-color: $list-group-disabled-color;
 
-$list-group-link-color:         #505664;
+$list-group-link-color:         lighten($content-color, 10%);
 $list-group-link-hover-color:   lighten($list-group-active-bg, 40%);
-$list-group-link-heading-color: #505664;
+$list-group-link-heading-color: $content-color;

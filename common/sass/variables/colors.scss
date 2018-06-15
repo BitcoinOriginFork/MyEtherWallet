@@ -1,6 +1,12 @@
 $ether-navy: #163151;
 $ether-blue: #0e97c0;
 
+// Origin Colors
+$body-bg: #383b40;
+$text-color: white;
+$content-color: #505664;
+$origin-orange: #ffa648;
+
 $gray-base: #000;
 $gray-darker: lighten($gray-base, 13.5%);
 $gray-dark: lighten($gray-base, 20%);
@@ -9,14 +15,11 @@ $gray-light: #9a9a9a;
 $gray-lighter: #ececec;
 $gray-lightest: #fafafa;
 
-$brand-primary: $ether-blue;
+$brand-primary: $origin-orange;
 $brand-success: #5dba5a;
 $brand-info: $ether-navy;
 $brand-warning: #ff9800;
 $brand-danger: #ea4b40;
-
-$body-bg: #fbfbfb;
-$text-color: $gray-dark;
 
 $component-active-color: #fff;
 $component-active-bg: $brand-primary;

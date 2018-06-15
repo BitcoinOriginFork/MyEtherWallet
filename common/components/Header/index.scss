@@ -28,6 +28,9 @@ $small-size: 900px;
 // Header
 .Header {
   margin-bottom: 2rem;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: $brand-primary;
 
   @media screen and (max-width: $screen-sm) {
     margin-bottom: 1rem;
@@ -80,7 +83,7 @@ $small-size: 900px;
   &-branding {
     color: white;
     padding: 0;
-    background-color: #505664;
+    background-color: $content-color;
 
     @include small-query {
       text-align: center;

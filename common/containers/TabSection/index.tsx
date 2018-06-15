@@ -86,7 +86,7 @@ class TabSection extends Component<Props, {}> {
     return (
       <div className="wrapper">
         <Sidebar />
-        <div className="page-layout">
+        <div className="page-layout" style={{ width: '100%' }}>
           <main>
             <Header {...headerProps} />
             <div className="Tab container">

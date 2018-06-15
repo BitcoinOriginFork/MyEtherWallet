@@ -11,12 +11,13 @@
       min-width: 80px;
       text-align: center;
       font-weight: 300;
-      color: $ether-navy;
-      border-bottom: 2px solid $gray-lighter;
+      color: $content-color;
+      border-bottom: 2px solid $content-color;
       transition-duration: 100ms;
 
       &.is-active {
-        border-bottom-color: $ether-blue;
+        border-bottom-color: $brand-primary;
+        color: $brand-primary;
       }
 
       &.is-disabled {
