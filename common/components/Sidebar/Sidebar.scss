@@ -1,7 +1,13 @@
+@import "common/sass/variables";
+
 .sidebar {
   min-width: 250px;
   max-width: 250px;
   background-color: #2f3034;
+
+  h4 {
+    color: $brand-primary;
+  }
 }
 
 .sidebar.active {

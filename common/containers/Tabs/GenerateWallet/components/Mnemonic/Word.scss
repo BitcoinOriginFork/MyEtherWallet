@@ -39,6 +39,7 @@ $number-margin: 6px;
     &-input {
       animation: word-fade 400ms ease 1;
       animation-fill-mode: both;
+      color: $gray !important;
     }
 
     &-toggle {

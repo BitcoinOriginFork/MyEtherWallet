@@ -7,6 +7,7 @@ export interface TabLink {
   name: string;
   to: string;
   external?: boolean;
+  icon?: string;
 }
 
 const tabs: TabLink[] = [

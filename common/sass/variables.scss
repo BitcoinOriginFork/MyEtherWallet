@@ -326,7 +326,7 @@ $list-group-border-radius:      $border-radius-base;
 //** Background color of single list items on hover
 $list-group-hover-bg:           $content-color;
 //** Text color of active list items
-$list-group-active-color:       white;
+$list-group-active-color:       $brand-primary;
 //** Background color of active list items
 $list-group-active-bg:          $content-color;
 //** Border color of active list elements

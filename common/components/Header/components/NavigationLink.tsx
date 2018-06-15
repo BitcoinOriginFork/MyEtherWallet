@@ -46,6 +46,7 @@ class NavigationLink extends React.PureComponent<Props, {}> {
         </a>
       ) : (
         <Link id={link.name} className={linkClasses} to={(link as any).to} aria-label={linkLabel}>
+          {link.icon && <i className={link.icon} style={{ marginRight: '10px' }} />}
           {translate(link.name)}
         </Link>
       );
