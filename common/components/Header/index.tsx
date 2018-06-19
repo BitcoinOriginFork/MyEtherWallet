@@ -18,7 +18,6 @@ import {
   CustomNodeConfig,
   CustomNetworkConfig
 } from 'config';
-import Navigation from './components/Navigation';
 import CustomNodeModal from './components/CustomNodeModal';
 import OnlineStatus from './components/OnlineStatus';
 import Version from './components/Version';
@@ -65,7 +64,6 @@ export default class Header extends PureComponent<Props, State> {
     } = this.props;
     const { isAddingCustomNode } = this.state;
     const selectedLanguage = languageSelection;
-    const selectedNetwork = getNetworkConfigFromId(node.network, customNetworks);
     const LanguageDropDown = Dropdown as new () => Dropdown<typeof selectedLanguage>;
 
     const nodeOptions = Object.keys(NODES)

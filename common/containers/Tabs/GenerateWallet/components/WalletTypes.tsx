@@ -1,7 +1,6 @@
 import React from 'react';
 import translate from 'translations';
 import { WalletType } from '../GenerateWallet';
-import { NewTabLink } from 'components/ui';
 import { Link } from 'react-router-dom';
 import './WalletTypes.scss';
 

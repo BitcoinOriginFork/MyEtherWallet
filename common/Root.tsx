@@ -3,12 +3,12 @@ import { Provider } from 'react-redux';
 import { withRouter, Switch, Redirect, HashRouter, Route, BrowserRouter } from 'react-router-dom';
 // Components
 import Contracts from 'containers/Tabs/Contracts';
-import ENS from 'containers/Tabs/ENS';
 import GenerateWallet from 'containers/Tabs/GenerateWallet';
 import Help from 'containers/Tabs/Help';
 import SendTransaction from 'containers/Tabs/SendTransaction';
-import Swap from 'containers/Tabs/Swap';
 import SignAndVerifyMessage from 'containers/Tabs/SignAndVerifyMessage';
+import Claim from 'containers/Tabs/Claim';
+import Stake from 'containers/Tabs/Stake';
 import BroadcastTx from 'containers/Tabs/BroadcastTx';
 import ErrorScreen from 'components/ErrorScreen';
 import PageNotFound from 'components/PageNotFound';
@@ -62,9 +62,9 @@ export default class Root extends Component<Props, State> {
           <Redirect exact={true} from="/" to="/account" />
           <Route path="/account" component={SendTransaction} />
           <Route path="/generate" component={GenerateWallet} />
-          <Route path="/swap" component={Swap} />
           <Route path="/contracts" component={Contracts} />
-          <Route path="/ens" component={ENS} />
+          <Route path="/claim" component={Claim} />
+          <Route path="/stake" component={Stake} />
           <Route path="/help" component={Help} />
           <Route path="/sign-and-verify-message" component={SignAndVerifyMessage} />
           <Route path="/pushTx" component={BroadcastTx} />

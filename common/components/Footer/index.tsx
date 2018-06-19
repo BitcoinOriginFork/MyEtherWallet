@@ -1,31 +1,7 @@
-import logo from 'assets/images/logo-myetherwallet.svg';
-import {
-  bityReferralURL,
-  ledgerReferralURL,
-  trezorReferralURL,
-  bitboxReferralURL,
-  donationAddressMap,
-  VERSION,
-  knowledgeBaseURL
-} from 'config';
 import React from 'react';
 import translate from 'translations';
 import './index.scss';
 import Modal, { IButton } from 'components/ui/Modal';
-import { NewTabLink } from 'components/ui';
-
-const AffiliateTag = ({ link, text }: Link) => {
-  return (
-    <li className="Footer-affiliate-tag" key={link}>
-      <NewTabLink href={link}>{text}</NewTabLink>
-    </li>
-  );
-};
-
-interface Link {
-  link: string;
-  text: string;
-}
 
 interface Props {
   latestBlock: string;
@@ -69,11 +45,7 @@ export default class Footer extends React.PureComponent<Props, State> {
                     handleClose={this.closeModal}
                   >
                     <p>
-                      <b>Be safe & secure: </b>
-                      <NewTabLink href={`${knowledgeBaseURL}/security/securing-your-ethereum`}>
-                        We highly recommend that you read our guide on How to Prevent Loss & Theft
-                        for some recommendations on how to be proactive about your security.
-                      </NewTabLink>
+                      <b>Be safe & secure</b>
                     </p>
                     <p>
                       <b>Always backup your keys: </b>
@@ -127,7 +99,7 @@ export default class Footer extends React.PureComponent<Props, State> {
               </div>
               <div className="col-sm-6">
                 <p>Latest Block#: {this.props.latestBlock}</p>
-                <p>v{VERSION}</p>
+                <p>v0.0.1</p>
                 <p>&copy; 2017 MyEtherWallet, LLC</p>
               </div>
             </div>
