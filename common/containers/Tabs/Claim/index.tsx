@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { Metamask } from './components/Metamask';
-import { PrivateKey } from './components/PrivateKey';
-import { Signature } from './components/Signature';
+import { InitiateClaim, SignClaim, ClaimConfirmation } from './components';
 import TabSection from 'containers/TabSection';
-import { RouteComponentProps, Switch, Route, Redirect } from 'react-router';
-import SubTabs from 'components/SubTabs';
+import { RouteComponentProps, Switch, Route } from 'react-router';
 import { RouteNotFound } from 'components/RouteNotFound';
 
 interface State {
@@ -22,34 +19,17 @@ export default class Claim extends Component<RouteComponentProps<{}>, State> {
     const { match } = this.props;
     const currentPath = match.url;
 
-    const tabs = [
-      {
-        path: 'signature',
-        name: 'Signature'
-      },
-      {
-        path: 'privateKey',
-        name: 'Private Key'
-      },
-      {
-        path: 'metamask',
-        name: 'Metamask'
-      }
-    ];
-
     return (
       <TabSection>
         <section className="Tab-content Claim">
-          <SubTabs tabs={tabs} match={match} />
           <Switch>
+            <Route exact={true} path={currentPath} component={InitiateClaim} />
+            <Route exact={true} path={`${currentPath}/signature`} component={SignClaim} />
             <Route
               exact={true}
-              path={currentPath}
-              render={() => <Redirect from={`${currentPath}`} to={`${currentPath}/signature`} />}
+              path={`${currentPath}/confirmation`}
+              component={ClaimConfirmation}
             />
-            <Route exact={true} path={`${currentPath}/signature`} component={Signature} />
-            <Route exact={true} path={`${currentPath}/privateKey`} component={PrivateKey} />
-            <Route exact={true} path={`${currentPath}/metamask`} component={Metamask} />
             <RouteNotFound />
           </Switch>
         </section>
