@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ClaimCurrency } from 'enums';
+import { IFullWallet } from 'libs/wallet';
 
 export interface ClaimDetails {
   currency: string;
   currencyAddress?: string;
-  claimToAddress?: string;
 }
 
-export class InitiateClaim extends React.Component<any, ClaimDetails> {
+export class InitiateClaim extends React.Component<{ wallet: IFullWallet }, ClaimDetails> {
   constructor(props) {
     super(props);
     this.state = { currency: ClaimCurrency.bitcoin };
@@ -36,12 +36,9 @@ export class InitiateClaim extends React.Component<any, ClaimDetails> {
 
     // TODO: Validate Form Fields. Display relevant errors or proceed
 
-    const { match } = this.props;
-    const currentPath = match.url;
-    const query = `currency=${this.state.currency}&currencyAddress=${
-      this.state.currencyAddress
-    }&claimToAddress=${this.state.claimToAddress}`;
-    this.props.history.push(`${currentPath}/signature?${query}`);
+    // Submit the 2 fields to the Submit component, possibly a "checkClaim" function
+    // that hits the DB, and loads until the record is returned. This record will
+    // say if a claim can occur. If it can, signatures, if not say why (complete, or invalid)
   }
 
   public render() {
