@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
+const withRouter: any = require('react-router-dom').withRouter;
 import Modal, { IButton } from 'components/ui/Modal';
 import { AppState } from 'reducers';
 import { resetWallet, TResetWallet } from 'actions/wallet';
@@ -84,4 +85,4 @@ function mapStateToProps(state: AppState) {
 
 export default connect(mapStateToProps, {
   resetWallet
-})(withRouter<Props>(LogOutPromptClass));
+})(withRouter(LogOutPromptClass));

@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ClaimConfirmation } from './Confirmation';
 import { InitiateClaim } from './Initiate';
-import { SignClaim } from './Signature';
 import { IFullWallet } from 'libs/wallet';
 import { TShowNotification, showNotification } from 'actions/notifications';
+import { getContractData } from 'actions/xbo';
 import { TResetWallet, resetWallet } from 'actions/wallet';
 import { AppState } from 'reducers';
 import { isWalletFullyUnlocked } from 'selectors/wallet';
@@ -16,6 +15,7 @@ interface Props {
   unlocked: boolean;
   showNotification: TShowNotification;
   resetWallet: TResetWallet;
+  getContractData: any;
 }
 
 enum Workflow {
@@ -35,6 +35,10 @@ const initialState: State = {
 
 export class SubmitFlow extends React.Component<Props, State> {
   public state: State = initialState;
+
+  public componentDidMount() {
+    this.props.getContractData();
+  }
 
   public componentWillUnmount() {
     this.props.resetWallet();
@@ -66,5 +70,6 @@ const mapStateToProps = (state: AppState) => ({
 
 export const Submit = connect(mapStateToProps, {
   showNotification,
-  resetWallet
+  resetWallet,
+  getContractData
 })(SubmitFlow);

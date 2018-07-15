@@ -27,6 +27,9 @@
     "spec",
     "./node_modules/types-rlp/index.d.ts"
   ],
+  "exclude": [
+    "./node_modules"
+  ],
   "awesomeTypescriptLoaderOptions": {
     "transpileOnly": true
   }

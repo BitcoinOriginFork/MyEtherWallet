@@ -195,7 +195,8 @@ module.exports = function(opts = {}) {
       'process.env.NODE_ENV': JSON.stringify(options.isProduction ? 'production' : 'development'),
       'process.env.BUILD_DOWNLOADABLE': JSON.stringify(isDownloadable),
       'process.env.BUILD_HTML': JSON.stringify(options.isHTMLBuild),
-      'process.env.BUILD_ELECTRON': JSON.stringify(options.isElectronBuild)
+      'process.env.BUILD_ELECTRON': JSON.stringify(options.isElectronBuild),
+      'process.env.XBO_API': JSON.stringify(options.xboEndpoint)
     })
   ];
 

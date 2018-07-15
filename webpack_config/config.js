@@ -14,7 +14,7 @@ const paths = {
 
 module.exports = {
   // Configuration
-  port: process.env.HTTPS ? 3443 : 3000,
+  port: process.env.HTTPS ? 3443 : 4000,
   title: 'MEW',
   path: paths,
 
@@ -43,7 +43,6 @@ module.exports = {
     'bip39',
     'bn.js',
     'classnames',
-    'ethereum-blockies',
     'ethereumjs-abi',
     'ethereumjs-tx',
     'ethereumjs-util',
