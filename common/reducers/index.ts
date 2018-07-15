@@ -9,6 +9,7 @@ import { rates, State as RatesState } from './rates';
 import { State as SwapState, swap } from './swap';
 import { State as WalletState, wallet } from './wallet';
 import { State as TransactionState, transaction } from './transaction';
+import { State as XboState, xbo } from './xbo';
 import { onboardStatus, State as OnboardStatusState } from './onboardStatus';
 
 export interface AppState {
@@ -26,6 +27,7 @@ export interface AppState {
   routing: any;
   swap: SwapState;
   transaction: TransactionState;
+  xbo: XboState;
 }
 
 export default combineReducers({
@@ -39,5 +41,6 @@ export default combineReducers({
   rates,
   deterministicWallets,
   routing: routerReducer,
-  transaction
+  transaction,
+  xbo
 });
