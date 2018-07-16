@@ -1,5 +1,4 @@
 // Where shared common styles live
-
 // --- BOOTSTRAP ---
 @import './variables';
 @import './mixins';
@@ -36,3 +35,18 @@
 @import './styles/tab';
 @import './styles/flexbox';
 @import './fonts';
+
+// TODO: Move this somewhere appropriate
+html, body, #app, .wrapper, main {
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.Tab {
+  flex: 1;
+}

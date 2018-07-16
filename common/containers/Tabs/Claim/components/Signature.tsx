@@ -1,15 +1,25 @@
 import * as React from 'react';
-export class SignClaim extends React.Component<any, any> {
-  constructor(props) {
-    super(props);
+import { IFullWallet } from 'libs/wallet';
+
+export class SignClaim extends React.Component<
+  { wallet: IFullWallet; balance: any },
+  { message: string }
+> {
+  public state = { message: '' };
+
+  public async componentDidMount() {
+    const walletAddress = await this.props.wallet.getAddressString();
+    this.setState({ message: `XBO:${walletAddress}` });
   }
 
   public render() {
     return (
       <div className="Tab-content-pane">
         <h1>Provide Signature</h1>
-        <h3>Message To Sign</h3>
-        <p>MESSAGE TO SIGN GOES HERE</p>
+        <h3>Sign the following message</h3>
+        <p>{this.state.message}</p>
+        <h3>Claimable Balance</h3>
+        <p>{JSON.stringify(this.props.balance)}</p>
         <form>
           <div className="form-group">
             <label htmlFor="signature">Signature</label>

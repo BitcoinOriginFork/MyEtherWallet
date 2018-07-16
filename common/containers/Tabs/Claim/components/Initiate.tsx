@@ -7,7 +7,10 @@ export interface ClaimDetails {
   currencyAddress?: string;
 }
 
-export class InitiateClaim extends React.Component<{ wallet: IFullWallet }, ClaimDetails> {
+export class InitiateClaim extends React.Component<
+  { wallet: IFullWallet; checkClaim: any },
+  ClaimDetails
+> {
   constructor(props) {
     super(props);
     this.state = { currency: ClaimCurrency.bitcoin };
@@ -36,9 +39,7 @@ export class InitiateClaim extends React.Component<{ wallet: IFullWallet }, Clai
 
     // TODO: Validate Form Fields. Display relevant errors or proceed
 
-    // Submit the 2 fields to the Submit component, possibly a "checkClaim" function
-    // that hits the DB, and loads until the record is returned. This record will
-    // say if a claim can occur. If it can, signatures, if not say why (complete, or invalid)
+    this.props.checkClaim({ address: this.state.currencyAddress, chain: this.state.currency });
   }
 
   public render() {
@@ -58,32 +59,17 @@ export class InitiateClaim extends React.Component<{ wallet: IFullWallet }, Clai
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="cryptoAddress">Your CURRENCY Address</label>
+            <label htmlFor="cryptoAddress">Your {this.state.currency} Address</label>
             <input
               className="form-control"
               type="text"
               id="cryptoAddress"
-              placeholder={`Your CURRENCY Address`}
+              placeholder={`Your ${this.state.currency} Address`}
               onChange={ev => this.handleKeypress(ev)}
               name="currencyAddress"
             />
             <span id="currencyAddressHelp" className="help-block">
               This is the address of the currency you are claiming for.
-            </span>
-          </div>
-          <div className="form-group">
-            <label htmlFor="claimToAddress">Your CLAIM TO Address</label>
-            <input
-              className="form-control"
-              type="text"
-              id="claimToAddress"
-              placeholder={`Your CLAIM TO Address`}
-              aria-describedby="claimToHelp"
-              onChange={ev => this.handleKeypress(ev)}
-              name="claimToAddress"
-            />
-            <span id="claimToHelp" className="help-block">
-              This is the ETH address that Origin ERC20 Tokens will be sent to.
             </span>
           </div>
           <button type="submit" className="btn btn-primary">
