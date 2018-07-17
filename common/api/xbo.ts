@@ -11,3 +11,8 @@ export async function queryCurrencyBalance(chain: string, address: string) {
   const res = await axios.get(`${endpoint}/balance?chain=${chain}&chainAddress=${address}`);
   return res.data;
 }
+
+export async function submitClaim(req) {
+  const res = await axios.post(`${endpoint}/claim`, req);
+  return res.data;
+}

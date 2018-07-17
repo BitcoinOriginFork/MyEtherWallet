@@ -84,7 +84,7 @@ export class SignMessage extends Component<Props, State> {
                   <textarea
                     className="SignMessage-inputBox form-control"
                     value={JSON.stringify(signedMessage, null, 2)}
-                    disabled={true}
+                    readOnly={true}
                     onChange={this.handleMessageChange}
                   />
                 </div>

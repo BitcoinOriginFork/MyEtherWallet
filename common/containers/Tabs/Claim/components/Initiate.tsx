@@ -20,7 +20,6 @@ export class InitiateClaim extends React.Component<
     ev.preventDefault();
     const key = ev.target.name as any;
     this.setState({ [key]: ev.target.value });
-    console.log(this.state);
   }
 
   public claimableOptions = () => {
