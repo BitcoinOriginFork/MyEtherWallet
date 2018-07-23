@@ -22,7 +22,6 @@ const INITIAL_STATE: State = {
 };
 
 const updateField = (key: keyof State): Reducer<State> => (state: State, action: FieldAction) => {
-  console.log(key);
   return {
     ...state,
     [key]: { ...state[key], ...action.payload }
