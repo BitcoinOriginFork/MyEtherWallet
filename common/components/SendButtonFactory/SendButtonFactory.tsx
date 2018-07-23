@@ -23,8 +23,9 @@ interface OwnProps {
   withProps(props: CallbackProps): React.ReactElement<any> | null;
 }
 
-const getStringifiedTx = (serializedTransaction: string) =>
-  JSON.stringify(getTransactionFields(makeTransaction(serializedTransaction)), null, 2);
+const getStringifiedTx = (serializedTransaction: string) => {
+  return JSON.stringify(getTransactionFields(makeTransaction(serializedTransaction)), null, 2);
+};
 
 type Props = StateProps & OwnProps;
 class SendButtonFactoryClass extends Component<Props> {

@@ -17,7 +17,9 @@ import { Wei } from 'libs/units';
 import { getTransactionFields } from 'libs/transaction/utils/ether';
 import { getNetworkConfig } from 'selectors/config';
 
-const getTransactionState = (state: AppState) => state.transaction;
+const getTransactionState = (state: AppState) => {
+  return state.transaction;
+};
 
 export interface IGetTransaction {
   transaction: EthTx;

@@ -43,15 +43,12 @@ class TokenBalances extends React.Component<Props> {
   public render() {
     const {
       tokens,
-      walletConfig,
       tokenBalances,
       hasSavedWalletTokens,
       isTokensLoading,
       tokensError,
       isOffline
     } = this.props;
-
-    const walletTokens = walletConfig ? walletConfig.tokens : [];
 
     let content;
     if (isOffline) {
@@ -68,22 +65,11 @@ class TokenBalances extends React.Component<Props> {
           <Spinner size="x3" />
         </div>
       );
-    } else if (!walletTokens) {
-      content = (
-        <button
-          className="TokenBalances-scan btn btn-primary btn-block"
-          onClick={this.scanWalletForTokens}
-        >
-          {translate('Scan for my Tokens')}
-        </button>
-      );
     } else {
-      const shownBalances = tokenBalances.filter(t => walletTokens.includes(t.symbol));
-
       content = (
         <Balances
           allTokens={tokens}
-          tokenBalances={shownBalances}
+          tokenBalances={tokenBalances}
           hasSavedWalletTokens={hasSavedWalletTokens}
           scanWalletForTokens={this.scanWalletForTokens}
           setWalletTokens={this.props.setWalletTokens}

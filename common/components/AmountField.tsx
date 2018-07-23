@@ -9,11 +9,7 @@ interface Props {
   customValidator?(rawAmount: string): boolean;
 }
 
-export const AmountField: React.SFC<Props> = ({
-  hasUnitDropdown,
-  showAllTokens,
-  customValidator
-}) => (
+export const AmountField: React.SFC<Props> = ({ hasUnitDropdown, customValidator }) => (
   <AmountFieldFactory
     withProps={({ currentValue: { raw }, isValid, onChange, readOnly }) => (
       <React.Fragment>
@@ -29,7 +25,7 @@ export const AmountField: React.SFC<Props> = ({
             readOnly={!!readOnly}
             onChange={onChange}
           />
-          {hasUnitDropdown && <UnitDropDown showAllTokens={showAllTokens} />}
+          {hasUnitDropdown && <UnitDropDown showAllTokens={true} />}
         </div>
       </React.Fragment>
     )}

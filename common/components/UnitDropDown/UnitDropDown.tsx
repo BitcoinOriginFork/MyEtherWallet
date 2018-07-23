@@ -27,6 +27,7 @@ const ConditionalStringDropDown = withConditional(StringDropdown);
 class UnitDropdownClass extends Component<DispatchProps & StateProps> {
   public render() {
     const { tokens, allTokens, showAllTokens, unit, network } = this.props;
+    console.log(showAllTokens);
     const focusedTokens = showAllTokens ? allTokens : tokens;
     return (
       <div className="input-group-btn">

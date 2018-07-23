@@ -21,10 +21,13 @@ const INITIAL_STATE: State = {
   gasPrice: { raw: '21', value: gasPricetoBase(21) }
 };
 
-const updateField = (key: keyof State): Reducer<State> => (state: State, action: FieldAction) => ({
-  ...state,
-  [key]: { ...state[key], ...action.payload }
-});
+const updateField = (key: keyof State): Reducer<State> => (state: State, action: FieldAction) => {
+  console.log(key);
+  return {
+    ...state,
+    [key]: { ...state[key], ...action.payload }
+  };
+};
 
 const tokenToEther = (
   state: State,
@@ -49,7 +52,7 @@ const tokenToToken = (
   { payload: { decimal: _, tokenValue: __, ...rest } }: SwapTokenToTokenAction
 ): State => ({ ...state, ...rest });
 
-const reset = (state: State): State => ({ ...INITIAL_STATE, gasPrice: state.gasPrice });
+// const reset = (state: State): State => ({ ...INITIAL_STATE, gasPrice: state.gasPrice });
 
 export const fields = (
   state: State = INITIAL_STATE,
@@ -74,8 +77,8 @@ export const fields = (
       return etherToToken(state, action);
     case TK.TOKEN_TO_TOKEN_SWAP:
       return tokenToToken(state, action);
-    case TK.RESET:
-      return reset(state);
+    // case TK.RESET:
+    //   return reset(state);
     default:
       return state;
   }
