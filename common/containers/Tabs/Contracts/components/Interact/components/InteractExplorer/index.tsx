@@ -38,7 +38,7 @@ interface State {
   selectedFunction: null | ContractOption;
 }
 
-interface ContractFunction {
+export interface ContractFunction {
   constant: boolean;
   decodeInput: any;
   decodeOutput: any;
@@ -47,7 +47,7 @@ interface ContractFunction {
   outputs: any;
 }
 
-interface ContractOption {
+export interface ContractOption {
   contract: ContractFunction;
   name: string;
 }
