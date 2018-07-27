@@ -11,7 +11,8 @@ import {
   scanWalletForTokens,
   TScanWalletForTokens,
   setWalletTokens,
-  TSetWalletTokens
+  TSetWalletTokens,
+  setTokenBalancesPending
 } from 'actions/wallet';
 import { getAllTokens } from 'selectors/config';
 import { getTokenBalances, getWalletInst, getWalletConfig, TokenBalance } from 'selectors/wallet';
@@ -36,10 +37,15 @@ interface ActionProps {
   removeCustomToken: TRemoveCustomToken;
   scanWalletForTokens: TScanWalletForTokens;
   setWalletTokens: TSetWalletTokens;
+  setTokenBalancesPending: any;
 }
 type Props = StateProps & ActionProps;
 
 class TokenBalances extends React.Component<Props> {
+  public componentDidMount() {
+    this.props.setTokenBalancesPending();
+  }
+
   public render() {
     const {
       tokens,
@@ -112,5 +118,6 @@ export default connect(mapStateToProps, {
   addCustomToken,
   removeCustomToken,
   scanWalletForTokens,
+  setTokenBalancesPending,
   setWalletTokens
 })(TokenBalances);

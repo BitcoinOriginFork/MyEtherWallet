@@ -76,6 +76,7 @@ export const fields = (
       return etherToToken(state, action);
     case TK.TOKEN_TO_TOKEN_SWAP:
       return tokenToToken(state, action);
+    // TODO: Fix incorrect reset call in Contract section to re-enable this
     // case TK.RESET:
     //   return reset(state);
     default:

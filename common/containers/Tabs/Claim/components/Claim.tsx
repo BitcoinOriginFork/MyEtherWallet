@@ -41,7 +41,6 @@ class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
     };
   }
 
-  // TODO: Re-import TXMetaDataPanel
   public componentDidMount() {
     const xbo = this.props.networkConfig.network.contracts.filter(c => c.name === 'XBO')[0];
     const parsedAbi = JSON.parse(xbo.abi);
@@ -51,13 +50,6 @@ class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
     const data = contractInstance.claim.encodeInput({});
     this.props.setDataField({ raw: data, value: Data(data) });
     this.setState({ instance: contractInstance });
-  }
-
-  public dailyClaim() {
-    this.setState({ loading: true });
-    // Some function
-
-    this.setState({ claimSucceeded: true, loading: false });
   }
 
   public render() {
