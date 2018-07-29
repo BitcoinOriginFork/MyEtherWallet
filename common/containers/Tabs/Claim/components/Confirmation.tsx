@@ -1,13 +1,19 @@
 import * as React from 'react';
-export class ClaimConfirmation extends React.Component<any, any> {
-  constructor(props) {
-    super(props);
-  }
 
+interface Props {
+  claim?: any;
+}
+
+export class ClaimConfirmation extends React.PureComponent<Props> {
   public render() {
+    console.log(this.props.claim);
     return (
       <div className="Tab-content-pane">
-        <h1>Success</h1>
+        <h3>Successful Claim Initiation</h3>
+        <p>
+          <b>Transaction Hash: </b>
+          {this.props.claim.tx_hash}
+        </p>
       </div>
     );
   }

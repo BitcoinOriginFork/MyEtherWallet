@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { WalletDecrypt } from 'components';
 import { DISABLE_WALLETS } from 'components/WalletDecrypt';
 import { queryCurrencyBalance, submitClaim as submitClaimToApi } from 'api/xbo';
+import { Spinner } from 'components/ui';
 
 interface Props {
   wallet: IFullWallet;
@@ -65,7 +66,10 @@ export class SubmitFlow extends React.Component<Props, State> {
 
   public checkClaim = async ({ address, chain }) => {
     this.setState({ workflow: Workflow.loading, chainAddress: address, chain });
-    const balance: CurrencyBalance = await queryCurrencyBalance(chain, address);
+    const balance: CurrencyBalance = await queryCurrencyBalance(chain, address).catch(e => {
+      this.props.showNotification('danger', e.message);
+      this.setState({ workflow: Workflow.initiate });
+    });
 
     this.setState({ workflow: Workflow.sign, balance });
   };
@@ -78,8 +82,10 @@ export class SubmitFlow extends React.Component<Props, State> {
       signature,
       chain: this.state.chain,
       address: this.state.chainAddress
+    }).catch(e => {
+      this.props.showNotification('danger', e.message);
+      this.setState({ workflow: Workflow.initiate });
     });
-    console.log(claim);
 
     this.setState({ workflow: Workflow.confirm, claim });
   };
@@ -94,7 +100,7 @@ export class SubmitFlow extends React.Component<Props, State> {
         {unlocked ? (
           <div className="Tab-content-pane">
             <h3>Create New Claim</h3>
-            {workflow === Workflow.loading && <h3>Loading...</h3>}
+            {workflow === Workflow.loading && <Spinner />}
             {workflow === Workflow.initiate && (
               <InitiateClaim wallet={wallet} checkClaim={this.checkClaim} />
             )}
@@ -104,6 +110,7 @@ export class SubmitFlow extends React.Component<Props, State> {
                 balance={cb}
                 chain={chain}
                 submitClaim={this.submitClaim}
+                resetWorkflow={() => this.setState({ workflow: Workflow.initiate })}
               />
             )}
             {workflow === Workflow.confirm && <ClaimConfirmation claim={claim} />}

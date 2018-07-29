@@ -14,7 +14,7 @@ import {
 import { DISABLE_WALLETS } from 'components/WalletDecrypt';
 import Contract from 'libs/contracts';
 import { Address, Data } from 'libs/units';
-import { setToField, setDataField } from 'actions/transaction';
+import { setToField, setDataField, reset } from 'actions/transaction';
 
 export interface DailyClaimState {
   loading: boolean;
@@ -30,6 +30,7 @@ interface DailyClaimProps {
   unlocked: boolean;
   getContractData: any;
   xbo: { contract: { address: string; abi: string } };
+  reset: any;
 }
 
 class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
@@ -52,18 +53,22 @@ class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
     this.setState({ instance: contractInstance });
   }
 
+  public componentWillUnmount() {
+    this.props.reset();
+  }
+
   public render() {
     return (
-      <div className="Tab-content-pane">
+      <div>
         {this.props.unlocked ? (
-          <div>
+          <div className="Tab-content-pane">
             <h1>Daily Claim</h1>
             {!this.state.loading &&
               !this.state.claimSucceeded && (
                 <div>
                   <TXMetaDataPanel
                     className="form-group"
-                    initialState="advanced"
+                    initialState="simple"
                     disableToggle={true}
                     advancedGasOptions={{ dataField: false }}
                   />
@@ -93,5 +98,6 @@ const mapStateToProps = (state: AppState) => ({
 export const DailyClaim = connect(mapStateToProps, {
   getContractData,
   setToField,
-  setDataField
+  setDataField,
+  reset
 })(Claim);

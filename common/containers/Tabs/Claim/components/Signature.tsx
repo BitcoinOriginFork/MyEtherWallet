@@ -3,7 +3,13 @@ import { IFullWallet } from 'libs/wallet';
 import { CurrencyBalance } from 'containers/Tabs/Claim/components';
 
 export class SignClaim extends React.Component<
-  { wallet: IFullWallet; balance: CurrencyBalance; chain: string; submitClaim: any },
+  {
+    wallet: IFullWallet;
+    balance: CurrencyBalance;
+    chain: string;
+    submitClaim: any;
+    resetWorkflow: any;
+  },
   { message: string; signature: string }
 > {
   public state = { message: '', signature: '' };
@@ -55,7 +61,21 @@ export class SignClaim extends React.Component<
             </form>
           </div>
         ) : (
-          <h3>Invalid claim</h3>
+          <div>
+            <h3>Invalid claim</h3>
+            {this.props.balance.balance === 0 ? (
+              <p>No claimable balance for specified address</p>
+            ) : (
+              <p>This balance has already been claimed</p>
+            )}
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={() => this.props.resetWorkflow()}
+            >
+              Reset
+            </button>
+          </div>
         )}
       </div>
     );
