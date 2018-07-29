@@ -222,6 +222,7 @@ class InteractExplorerClass extends Component<Props, State> {
       (accu, key) => ({ ...accu, [key]: inputs[key].parsedData }),
       {}
     );
+    console.log(parsedInputs);
     return selectedFunction!.contract.encodeInput(parsedInputs);
   }
 

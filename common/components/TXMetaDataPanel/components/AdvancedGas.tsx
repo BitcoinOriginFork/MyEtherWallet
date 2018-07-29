@@ -109,9 +109,9 @@ class AdvancedGas extends React.Component<Props, State> {
           <div className="AdvancedGas-fee-summary">
             <FeeSummary
               gasPrice={gasPrice}
-              render={({ gasPriceWei, gasLimit, fee, usd }) => (
+              render={({ gasPriceWei, gasLimit, fee }) => (
                 <span>
-                  {gasPriceWei} * {gasLimit} = {fee} {usd && <span>~= ${usd} USD</span>}
+                  {gasPriceWei} * {gasLimit} = {fee}
                 </span>
               )}
             />

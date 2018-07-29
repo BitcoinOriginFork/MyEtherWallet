@@ -15,11 +15,17 @@ import { DISABLE_WALLETS } from 'components/WalletDecrypt';
 import Contract from 'libs/contracts';
 import { Address, Data } from 'libs/units';
 import { setToField, setDataField, reset } from 'actions/transaction';
+import { Spinner } from 'components/ui';
+import { getNodeLib } from 'selectors/config';
+import { showNotification } from 'actions/notifications';
+import { getXboInstance } from 'libs/xbo';
 
 export interface DailyClaimState {
   loading: boolean;
   claimSucceeded: boolean;
+  claimableBalance: number;
   instance?: Contract;
+  init: boolean;
 }
 
 interface DailyClaimProps {
@@ -31,26 +37,63 @@ interface DailyClaimProps {
   getContractData: any;
   xbo: { contract: { address: string; abi: string } };
   reset: any;
+  nodeLib: any;
+  showNotification: any;
 }
 
 class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false,
-      claimSucceeded: false
+      loading: true,
+      claimSucceeded: false,
+      claimableBalance: 0,
+      init: true
     };
   }
 
-  public componentDidMount() {
-    const xbo = this.props.networkConfig.network.contracts.filter(c => c.name === 'XBO')[0];
-    const parsedAbi = JSON.parse(xbo.abi);
-    const contractInstance: any = new Contract(parsedAbi);
-    this.props.setToField({ raw: xbo.address, value: Address(xbo.address) });
+  public checkClaimableBalance = async (): Promise<number> => {
+    const contractInstance = getXboInstance(this.props.networkConfig.network.contracts);
+    const address = await this.props.wallet.getAddressString();
+    const data = contractInstance.contract.getClaimableBalance.encodeInput({
+      _claimAddress: address
+    });
+    const callData = { to: contractInstance.xbo.address, data };
+    const results = await this.props.nodeLib.sendCallRequest(callData);
 
-    const data = contractInstance.claim.encodeInput({});
+    this.props.reset();
+
+    return (
+      contractInstance.contract.getClaimableBalance.decodeOutput(results)._claimableBalance /
+      10 ** 18
+    );
+  };
+
+  public claim = async () => {
+    const contractInstance = getXboInstance(this.props.networkConfig.network.contracts);
+    this.props.setToField({
+      raw: contractInstance.xbo.address,
+      value: Address(contractInstance.xbo.address)
+    });
+
+    const data = contractInstance.contract.claim.encodeInput({});
     this.props.setDataField({ raw: data, value: Data(data) });
-    this.setState({ instance: contractInstance });
+    this.setState({ instance: contractInstance.contract });
+  };
+
+  public async componentDidUpdate(prevProps) {
+    if (this.props !== prevProps && this.state.init && this.props.wallet) {
+      this.setState({ loading: true });
+      const claimableBalance = await this.checkClaimableBalance().catch(e => {
+        this.setState({ loading: false });
+        this.props.showNotification('danger', e.message);
+      });
+
+      this.props.reset();
+
+      this.setState({ claimableBalance: claimableBalance || 0, loading: false, init: false });
+      this.claim();
+    }
   }
 
   public componentWillUnmount() {
@@ -64,11 +107,12 @@ class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
           <div className="Tab-content-pane">
             <h1>Daily Claim</h1>
             {!this.state.loading &&
-              !this.state.claimSucceeded && (
+              this.state.claimableBalance !== 0 && (
                 <div>
+                  <p>Total Claimable Balance: {this.state.claimableBalance}</p>
                   <TXMetaDataPanel
                     className="form-group"
-                    initialState="simple"
+                    initialState="advanced"
                     disableToggle={true}
                     advancedGasOptions={{ dataField: false }}
                   />
@@ -77,8 +121,13 @@ class Claim extends React.Component<DailyClaimProps, DailyClaimState> {
                   <SendButton />
                 </div>
               )}
-            {this.state.claimSucceeded && <h3>Success</h3>}
-            {this.state.loading && <h3>Loading</h3>}
+            {!this.state.loading &&
+              this.state.claimableBalance === 0 && (
+                <div>
+                  <p>Nothing to claim. Initiate claim first</p>
+                </div>
+              )}
+            {this.state.loading && <Spinner />}
           </div>
         ) : (
           <WalletDecrypt hidden={this.props.unlocked} disabledWallets={DISABLE_WALLETS.READ_ONLY} />
@@ -92,12 +141,14 @@ const mapStateToProps = (state: AppState) => ({
   networkConfig: state.config,
   wallet: state.wallet.inst,
   unlocked: isWalletFullyUnlocked(state),
-  xbo: state.xbo
+  xbo: state.xbo,
+  nodeLib: getNodeLib(state)
 });
 
 export const DailyClaim = connect(mapStateToProps, {
   getContractData,
   setToField,
   setDataField,
-  reset
+  reset,
+  showNotification
 })(Claim);
